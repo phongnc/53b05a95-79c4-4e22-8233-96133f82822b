@@ -1,0 +1,26 @@
+<ion-view view-title="{{ 'Feedback' | translate }}" class="login-bg" cache-view="false" >
+    <ion-nav-buttons side="right">
+        <button class="button ink button-icon button-clear ion-navicon" menu-toggle="left" ></button>
+    </ion-nav-buttons>
+  <ion-content class="login">
+    <div class="overlay"></div>
+    <div class="content">
+        <img src="img/logo.png" />
+        <h2>SSISApp</h2>
+        <h4>SSIS Application</h4>
+        <h5>Full version for generator</h5>    
+    
+        <div>
+            <div class="divider">
+                <div class="line left"></div>
+                <div class="line right"></div>
+                <div class="text">{{'Feedback' | translate}}</div>
+            </div>
+            <button class="button icon-left ion-social-facebook button-positive button-block" ng-click="feedback('CLONE_APP')">{{'CLONE_APP' | translate}}</button>
+            <button class="button icon-left ion-social-google button-assertive button-block" ng-click="feedback('COMMENT_APP')">{{'COMMENT_APP' | translate}}</button>
+        </div>
+
+        <p class="note">origin version for generator</p>
+    </div>      
+  </ion-content>
+</ion-view>

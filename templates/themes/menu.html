@@ -1,0 +1,51 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-android-menu" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="dark-bg">
+        <div class="usermenu" ng-if="!datalogin.token" ng-click="showLogin();">
+            <div class="avatar"></div>
+            <h2>{{ 'Guess' | translate }}</h2>         
+        </div>
+        <div class="usermenu" ng-if="datalogin.token">
+            <div class="avatar" style="background-image: url({{datalogin.userPicture}});"></div>
+            <h2>{{datalogin.userName}}</h2>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+    <div class="item-input" ng-if="!datalogin.userEmail">
+      <label class="energized" style="text-align: center;">{{ 'ASK_EMAIL' | translate }}</label>
+    </div>
+    <div class="item-input" ng-if="!datalogin.userEmail">
+        <label class="item-input-wrapper light-bg">
+            <input class="form-control" type="text" placeholder="{{ 'Email' | translate }}" ng-model="newEmail.userEmail">
+        </label>
+        <button class="button ink button-icon button-clear icon ion-android-checkmark-circle" ng-click="setEmail();">
+        
+        </button>
+    </div>
+      <ion-list class="menulist">
+        <div ng-repeat="x in mainmenu">
+          <ion-item class="item-divider">
+            {{x.title | translate }}
+          </ion-item>
+          <ion-item ng-repeat="y in x.submenu" menu-close ui-sref="{{y.state}}" class="ink item-icon-left">
+            <span class="icon {{y.icon}}"></span>
+            {{y.title | translate }}
+          </ion-item>
+        </div>        
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

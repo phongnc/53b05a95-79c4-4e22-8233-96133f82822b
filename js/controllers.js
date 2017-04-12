@@ -1,56 +1,63 @@
-angular.module('starter.controllers', [])
+var app = angular.module('ssisapp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+app.controller('MenuCtrl', function($scope, MenuList, $translate) {	
+	$scope.$on('user:updated', function(event,data) {
+            $scope.datalogin = JSON.parse(window.localStorage.getItem('ssisapp-au'));
+        });
+	$scope.datalogin = JSON.parse(window.localStorage.getItem('ssisapp-au'));
+	$scope.newEmail = { userEmail: '' };
+	$scope.showLogin = function () {
+		$state.go("app.auth");
+	}
+	$scope.setEmail = function () {
+		$scope.datalogin.userEmail = $scope.newEmail.userEmail;
+	}
+	$scope.mainmenu = MenuList.getAllMenu();
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+	// Active INK Effect
+	//ionic.material.ink.displayEffect();
 })
+app.controller('DashListCtrl', function($scope, $stateParams, $timeout, MenuList, $translate) {
+	$scope.data = MenuList.getMenuById($stateParams.id);
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+    // setTimeout(function() {
+    //     ionic.material.motion.ripple();
+    // }, 500);
+
+    // Active INK Effect
+    //ionic.material.ink.displayEffect();
 })
+app.controller('FeedbackCtrl', function($scope, $ionicPopup, $translate) {
+    $scope.feedback = function(feedbackOption) {
+        $scope.feedbackdata = {};
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+        // An elaborate, custom popup
+        var feedbackPopup = $ionicPopup.show({
+            template: '<textarea autocomplete="off" class="form-control" rows="5" required placeholder="" ng-model="feedbackdata.content"></textarea>',
+            title: feedbackOption,
+            subTitle: 'Content',
+            scope: $scope,
+            buttons: [{
+                text: 'Cancel'
+            }, {
+                text: '<b>Send</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                    if (!$scope.feedbackdata.content) {
+                        e.preventDefault();
+                    } else {
+                        return $scope.feedbackdata.content;
+                    }
+                }
+            }]
+        });
+
+        feedbackPopup.then(function(res) {
+            console.log(feedbackOption, res);
+        });
+    }
+
+    // Active INK Effect
+    //ionic.material.ink.displayEffect();
+})
+;
