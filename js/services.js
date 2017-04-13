@@ -32,6 +32,11 @@ app.service('MenuList', function() {
         icon: 'ion-ios-email-outline',
         state: 'app.feedback'
       }]
+    },{
+      id: 100, 
+      title: 'SSISApp', 
+      icon: 'ion-android-favorite',
+      submenu: []
     }
   ];
 

@@ -6,7 +6,7 @@ window.global = {
 // 'ssisapp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'ssisapp.controllers' is found in controllers.js
-angular.module('ssisapp', ['ionic', 'ssisapp.controllers', 'ssisapp.services', 'pascalprecht.translate'])
+angular.module('ssisapp', ['ionic', 'topscroller', 'ssisapp.controllers', 'ssisapp.services', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
